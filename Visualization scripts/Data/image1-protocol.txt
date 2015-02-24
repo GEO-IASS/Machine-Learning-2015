@@ -1,0 +1,107 @@
+ThunderSTORM (1.3-2014-11-08)
+
+Input:
+{
+  "title": "image1.png"
+}
+Camera settings:
+{
+  "isEmGain": false,
+  "pixelSize": 1.0,
+  "offset": 80.0,
+  "photons2ADU": 50.0,
+  "gain": 100.0
+}
+Analysis:
+{
+  "name": "Wavelet filter (B-Spline)",
+  "parameters": {
+    "prefsPrefix": "thunderstorm.filters.wave",
+    "trackedParameters": {
+      "scale": {
+        "defaultValue": 2.0,
+        "value": 2.0
+      },
+      "order": {
+        "defaultValue": 3,
+        "value": 3
+      }
+    }
+  }
+}
+{
+  "name": "Local maximum",
+  "connectivity": 4,
+  "threshold": "std(Wave.F1)-3",
+  "parameters": {
+    "prefsPrefix": "thunderstorm.detectors.locmax",
+    "trackedParameters": {
+      "connectivity": {
+        "defaultValue": "8-neighbourhood",
+        "value": "4-neighbourhood"
+      },
+      "threshold": {
+        "defaultValue": "std(Wave.F1)",
+        "value": "std(Wave.F1)-3"
+      }
+    }
+  }
+}
+{
+  "name": "PSF: Gaussian",
+  "crowdedField": {
+    "params": {
+      "prefsPrefix": "thunderstorm.estimators.dense.mfa",
+      "trackedParameters": {
+        "fixed_intensity": {
+          "defaultValue": false,
+          "value": false
+        },
+        "expected_intensity": {
+          "defaultValue": "500:2500",
+          "value": "500:2500"
+        },
+        "nmax": {
+          "defaultValue": 5,
+          "value": 2
+        },
+        "pvalue": {
+          "defaultValue": 1.0E-6,
+          "value": 1.0E-6
+        },
+        "mfaenabled": {
+          "defaultValue": false,
+          "value": false
+        },
+        "keep_same_intensity": {
+          "defaultValue": true,
+          "value": false
+        }
+      }
+    },
+    "name": "Multi-emitter fitting analysis"
+  },
+  "parameters": {
+    "prefsPrefix": "thunderstorm.estimators",
+    "trackedParameters": {
+      "sigma": {
+        "defaultValue": 1.6,
+        "value": 1.0
+      },
+      "method": {
+        "defaultValue": "Weighted Least squares",
+        "value": "Least squares"
+      },
+      "full_image_fitting": {
+        "defaultValue": false,
+        "value": false
+      },
+      "fitradius": {
+        "defaultValue": 3,
+        "value": 3
+      }
+    }
+  }
+}
+Post-processing:
+[]
