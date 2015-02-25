@@ -17,26 +17,26 @@ png_Data = imread(png_File_Name);
 % get the x, y, chi and sigma
 x_Data = csv_Data(:,1);
 y_Data = csv_Data(:,2);
-chi2_Data = csv_Data(:,6);
-sigma_Data = csv_Data(:,3);
+intensity_Data = csv_Data(:,4);
 
 % calculate area by chi and sigma
 % area_Data = (sigma_Data*3).^2 * pi;
 
 % calculate the normalized chi square
-chi2_Normalized_Data = chi2_Data;
+%intensity_Data = sigma_Data;
 
 % concatenate the normalized chi square | x | y
-concatenated_Data = [chi2_Normalized_Data x_Data y_Data];
+concatenated_Data = [intensity_Data x_Data y_Data];
 
 % sort data
 sorted_Data = sortrows(concatenated_Data, 1);
+sorted_Data = flipud(sorted_Data);
 
 % generate results file
 [ img_Output ] = create_grid_image_one_type(png_Data, sorted_Data);
 img_Output = uint16(img_Output);
 
-imwrite(img_Output, 'chi_square.png')
+imwrite(img_Output, 'intensity.png')
 
 clear all
 close all
