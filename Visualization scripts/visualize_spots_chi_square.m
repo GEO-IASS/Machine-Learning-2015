@@ -20,6 +20,11 @@ y_Data = csv_Data(:,2);
 chi2_Data = csv_Data(:,6);
 sigma_Data = csv_Data(:,3);
 
+% Additional data being loaded for the extra visualization
+intensity_Data = csv_Data(:,4);
+bkgstd_Data = csv_Data(:,5);
+uncertainty_Data = csv_Data(:,7);
+
 % calculate area by chi and sigma
 % area_Data = (sigma_Data*3).^2 * pi;
 
@@ -27,10 +32,15 @@ sigma_Data = csv_Data(:,3);
 chi2_Normalized_Data = chi2_Data;
 
 % concatenate the normalized chi square | x | y
-concatenated_Data = [chi2_Normalized_Data x_Data y_Data];
+concatenated_Data = [chi2_Normalized_Data x_Data y_Data sigma_Data intensity_Data uncertainty_Data];
 
 % sort data
 sorted_Data = sortrows(concatenated_Data, 1);
+
+% remove the sorted information for extra visualization
+viz_data = sorted_Data(:, 4:6);
+viz_strings = {'std','n','u'};
+[figure_handle] = create_features_grid(viz_data, viz_strings);
 
 % generate results file
 [ img_Output ] = create_grid_image_one_type(png_Data, sorted_Data);

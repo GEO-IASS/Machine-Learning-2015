@@ -1,7 +1,8 @@
 % Script created for the ML-2015 project
 % Created by Omer Ishaq. Copy right @ omer.ishaq@gmail.com
 % Input:    img_Data is the image file from which spots are extracted
-%           position_Data is the file from which the positioning information is taken
+%           position_Data is the file from which the positioning information is taken, the position is in x,y format at
+%           locations 2,3 respectively in each row
 % Output:   Grid generated data
 %
 % Action:
